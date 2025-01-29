@@ -6,7 +6,13 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     [SerializeField] float movementSpeed;
     [SerializeField] private float groundDrag;
-    
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float jumpCooldown;
+    [SerializeField] private float airMultiplier;
+    private bool _readyToJump;
+
+    [Header("Keybinds")]
+    [SerializeField] private KeyCode JumpKey = KeyCode.Space;
     [Header("Ground Check")] [SerializeField]
     private float playerHeight;
     [SerializeField] private LayerMask isGround;
@@ -39,6 +45,13 @@ public class PlayerMovement : MonoBehaviour
     {
         _horizontalInput = Input.GetAxisRaw("Horizontal");
         _verticalInput = Input.GetAxisRaw("Vertical");
+        //Jump
+        if (Input.GetKey(JumpKey) && _readyToJump && _grounded)
+        {
+            _readyToJump = false;
+            Jump();
+            Invoke(nameof(ResetJump),jumpCooldown);
+        }
     }
 
     private void MovePlayer()
@@ -46,6 +59,10 @@ public class PlayerMovement : MonoBehaviour
         // orientation yerine oyuncunun modelini referans alarak hem hesaplayıp hemde oyuncuyu dondurebilirsin.
         _moveDirection = orientation.forward * _verticalInput + orientation.right * _horizontalInput;
         _myBody.AddForce(_moveDirection.normalized * (movementSpeed * 10f), ForceMode.Force);
+        
+        // ground & air force
+        _myBody.AddForce(_grounded ? _moveDirection.normalized * movementSpeed * 10f :
+            _moveDirection.normalized * movementSpeed *10f* airMultiplier, ForceMode.Force);
     }
 
     private void SpeedControl()
@@ -65,5 +82,15 @@ public class PlayerMovement : MonoBehaviour
         _grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, isGround);
         _myBody.drag = _grounded ? groundDrag:0;
     }
-    //TODO: jumping and airControl
+
+    private void Jump()
+    {
+        _myBody.velocity = new Vector3(_myBody.velocity.x, 0f, _myBody.velocity.z);
+        _myBody.AddForce(transform.up * jumpForce,ForceMode.Impulse);
+    }
+
+    private void ResetJump()
+    {
+        _readyToJump = true;
+    }
 }
