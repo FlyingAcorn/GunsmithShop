@@ -20,7 +20,7 @@ public class PlayerCam : MonoBehaviour
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensitivityY;
         _yRotation += mouseX;
         _xRotation -= mouseY;
-        _xRotation = Mathf.Clamp(_xRotation,-90f, +90f);
+        _xRotation = Mathf.Clamp(_xRotation,-89f, +89f);
         //for cam and players rotation
         transform.rotation =Quaternion.Euler(_xRotation,_yRotation,0);
         orientation.rotation =Quaternion.Euler(_xRotation,_yRotation,0);
