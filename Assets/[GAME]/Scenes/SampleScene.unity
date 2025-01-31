@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eea3f2d635d95846bc6f8806b78dde0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPos: {fileID: 343259389}
+  cameraPos: {fileID: 1292430194}
 --- !u!4 &55901823
 Transform:
   m_ObjectHideFlags: 0
@@ -1289,8 +1289,8 @@ GameObject:
   - component: {fileID: 1846312033}
   - component: {fileID: 1846312032}
   - component: {fileID: 1846312031}
-  - component: {fileID: 1846312030}
   - component: {fileID: 1846312029}
+  - component: {fileID: 1846312035}
   m_Layer: 0
   m_Name: TestInteractible
   m_TagString: Untagged
@@ -1310,26 +1310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e96656e8d2a9bbc449b13afaab1657c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outline: {fileID: 1846312030}
+  outline: {fileID: 1846312035}
   message: Press (E) To Interact
---- !u!114 &1846312030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1846312028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!65 &1846312031
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1416,6 +1398,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1846312035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846312028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

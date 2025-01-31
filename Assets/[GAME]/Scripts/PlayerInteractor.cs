@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerInteractor : MonoBehaviour
@@ -7,13 +8,13 @@ public class PlayerInteractor : MonoBehaviour
     private Interactable _currentInteractable;
     
     [Header("Keybinds")] [SerializeField] private KeyCode interactKey = KeyCode.E;
-    
+
     private void Update()
     {
         CheckInteraction();
         if (Input.GetKey(interactKey))
         {
-           _currentInteractable.Interact();
+           _currentInteractable?.Interact();
         }
     }
 
@@ -29,16 +30,11 @@ public class PlayerInteractor : MonoBehaviour
                 {
                     DisableCurrentInteractable();
                 }
-                if (target.enabled)
-                {
-                    _currentInteractable = target;
-                    target.EnableOutline();
-                    HUDController.Instance.EnableInteractionText(_currentInteractable.message);
-                }
-                else
-                {
-                    DisableCurrentInteractable();
-                }
+
+                if (!target.enabled || _currentInteractable) return;
+                _currentInteractable = target;
+                target.EnableOutline();
+                HUDController.Instance.EnableInteractionText(_currentInteractable.message);
             }
             else
             {
@@ -50,11 +46,11 @@ public class PlayerInteractor : MonoBehaviour
             DisableCurrentInteractable();
         }
     }
-
+    
     private void DisableCurrentInteractable()
     {
-        HUDController.Instance.DisableInteractionText();
         if (!_currentInteractable) return;
+        HUDController.Instance.DisableInteractionText();
         _currentInteractable.DisableOutline();
         _currentInteractable = null;
     }

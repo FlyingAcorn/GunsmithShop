@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Mime;
 using TMPro;
 using UnityEngine;
 
 public class HUDController : Singleton<HUDController>
 {
     [SerializeField] private TMP_Text interactionText;
-
-
+    
     public void EnableInteractionText(string text)
     {
         interactionText.text = text;
@@ -19,5 +15,4 @@ public class HUDController : Singleton<HUDController>
     {
         interactionText.gameObject.SetActive(false);
     }
-    
 }
